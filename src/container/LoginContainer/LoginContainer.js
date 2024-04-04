@@ -12,18 +12,32 @@ import {
     StatusBar,
     BackHandler,
     Alert,
-    ImageBackground
+    ImageBackground,
+    ScrollView
 } from 'react-native';
 import { Common } from '../../assets/images';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import api from '../../api';
 // const db = openDatabase({ name: 'user_db.db' });
 
-export default function LoginContainer() {
+const LoginContainer = (props) => {
 
-    const navigation = useNavigation()
-    const [username, setusername] = useState('');
-    const [password, setpassword] = useState('');
+    const navigation = useNavigation();
 
+    const { 
+        captchaRes, 
+        username, 
+        setUsername, 
+        password, 
+        setPassword,
+        captchaImg,
+        setCaptchaImg ,
+        ReloadCaptcha,
+        loading,
+        setLoading
+    } = props
+    console.log("captchaRes>>>>>>>>>>111111", captchaRes);
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', backAction);
@@ -46,73 +60,10 @@ export default function LoginContainer() {
         }
     };
 
-
-
-    // const loginWithSQLite = () => {
-    //     if (username == '' || password == '') {
-
-    //         alert('Please enter your username and password!');
-    //         return;
-    //     }
-    //     db.transaction(
-    //         tx => {
-    //             tx.executeSql(
-    //                 'SELECT * FROM tbl_user WHERE user_firstname= ?',
-    //                 [username],
-    //                 (tx, results) => {
-    //                     let temp = [];
-    //                     for (let i = 0; i < results.rows.length; ++i) {
-    //                         temp.push(results.rows.item(i));
-    //                     }
-    //                     console.log('responseess', temp);
-    //                     if (temp.length == 0) {
-    //                         alert("username and password has be deleted ")
-    //                     }
-    //                     else if (
-    //                         `${temp[0].user_firstname}` == `${username}` &&
-    //                         `${temp[0].user_contact}` == `${password}`
-    //                     ) {
-    //                         AsynsStorage.setItem('keepLoggedIn', 'true');
-    //                         navigation.navigate('ViewAll');
-    //                     }
-    //                     //   else if(
-    //                     //     `${temp[0].user_id}` == undefined && 
-    //                     //     `${temp[0].user_id}` == null &&
-    //                     //     `${temp[0].user_id}` == ""){
-    //                     //     alert("username and password has be deleted ")
-    //                     //   }
-    //                     else {
-    //                         alert('please enter valid details');
-    //                     }
-    //                 },
-    //             );
-    //         },
-    //         e => {
-    //             Alert.alert(
-    //                 'Error',
-    //                 'Login failed ' + e.message,
-    //                 [
-    //                     {
-    //                         text: 'Ok',
-    //                     },
-    //                 ],
-    //                 { cancelable: false },
-    //             );
-    //         },
-    //     );
-    // };
-
-
-
     return (
         <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-
             <ImageBackground source={Common.LOGIN_IMAGE} style={styles.container}>
-                <View style={styles.headerContainer}>
-                    <View style={styles.backButtonContainer}>
-                    </View>
-                </View>
-                <View style={styles.mainContainer}>
+                <ScrollView style={styles.mainContainer}>
 
                     <View style={styles.inputContainer}>
                         <TextInput
@@ -120,7 +71,7 @@ export default function LoginContainer() {
                             keyboardType="default"
                             style={styles.textInputStyle}
                             value={username}
-                            onChangeText={(txt) => { setusername(txt) }}
+                            onChangeText={(txt) => { setUsername(txt) }}
                         />
                     </View>
                     <View style={styles.inputContainer}>
@@ -130,7 +81,38 @@ export default function LoginContainer() {
                             secureTextEntry={true}
                             style={styles.textInputStyle}
                             value={password}
-                            onChangeText={(txt) => { setpassword(txt) }}
+                            onChangeText={(txt) => { setPassword(txt) }}
+                        />
+                    </View>
+                    <View style={{
+                        width: "80%",
+                        height: 30,
+                        alignSelf: "center",
+                        marginTop: 5,
+                        flexDirection: "row",
+                        justifyContent: "space-around"
+                    }}>
+                        <View style={styles.inputContainer1}>
+                            <Image style={{
+                                width: "50%",
+                                height: 30,
+
+                            }}
+                            resizeMode={"contain"}
+                                source={{ uri: 'data:image/png;base64,{' + captchaRes + '}' }}
+                            />
+                        </View>
+                        <TouchableOpacity onPress={() => { ReloadCaptcha() }}>
+                            <Ionicons name='reload' size={25} color="#000" />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            placeholder="Captcha"
+                            keyboardType="default"
+                            style={styles.captchaStyle}
+                            value={captchaImg}
+                            onChangeText={(txt) => { setCaptchaImg(txt) }}
                         />
                     </View>
                     <TouchableOpacity style={styles.button}
@@ -140,17 +122,25 @@ export default function LoginContainer() {
                         <Text style={[styles.headeringStyle, { color: "#FFF" }]}>LOGIN</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
-                        navigation.navigate("Register")
+                        // navigation.navigate("Register")
                     }}>
-                        <View style={{ width: "80%", alignItems: "center", justifyContent: "center", flexDirection: "row", alignSelf: "center", marginTop: 30 }}>
+                        <View style={{
+                            width: "80%",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexDirection: "row",
+                            alignSelf: "center",
+                            marginTop: 30
+                        }}>
                             <Text style={styles.svText}>Click here for Register </Text>
                         </View>
                     </TouchableOpacity>
-                </View>
+                </ScrollView>
             </ImageBackground>
         </TouchableWithoutFeedback>
     );
 }
+export default LoginContainer;
 
 const styles = StyleSheet.create({
     container: {
@@ -179,7 +169,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         width: "100%",
         height: "75%",
-        marginTop: "100%"
+        marginTop: "125%"
         // backgroundColor: "white", 
         // borderTopLeftRadius: 50,
         // borderTopRightRadius: 50,
@@ -193,9 +183,9 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: "80%",
-        height: 60,
+        height: 50,
         alignSelf: "center",
-        marginTop: 5,
+        // marginTop: 5,
     },
     placeholderText: {
         color: "#000",
@@ -205,8 +195,8 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 40,
         paddingLeft: 10,
-        borderWidth:1,
-        borderColor:"block"
+        borderWidth: 1,
+        borderColor: "block"
     },
     svpassword: {
         width: "80%",
@@ -228,6 +218,22 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 5
+    },
+    inputContainer1: {
+        width: "75%",
+        height: 30,
+        alignContent: "center",
+        borderWidth: 1, 
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    captchaStyle: {
+        width: "100%",
+        height: 40,
+        paddingLeft: 10,
+        // borderWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: "block"
     }
 });
 

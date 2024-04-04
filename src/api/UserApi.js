@@ -1,8 +1,17 @@
 import Base from "./BaseApi";
 
 export default class UserAPI extends Base {
-  captchaImg() {
-    return this.apiClient.get(null, "sahiya-login/captcha/captchaImg");
+  // https://surveillance-qa.dhanushinfotech.com/ihat-gateway/captcha/captchaImg?userId=0&platform=2
+  captchaImg(data) {
+    return this.apiClient.get(`ihat-gateway/captcha/captchaImg`,data);
+  }
+  // https://surveillance-qa.dhanushinfotech.com/ihat-gateway/captcha/reloadCaptchaImg/256vhg7ji2h4a0gr2qbm2v1q87?userId=0&platform=2
+  reloadCaptcha(data) {
+    return this.apiClient.get(`ihat-gateway/captcha/reloadCaptchaImg/256vhg7ji2h4a0gr2qbm2v1q87`,data);
+  }
+  // https://surveillance-qa.dhanushinfotech.com/ihat-surveillance/apk-verison/v1/getbyid?id=1&userId=0&platform=2
+  apkVersion(data) {
+    return this.apiClient.get(`ihat-surveillance/apk-verison/v1/getbyid`,data);
   }
   signIn(intl, params, data) {
     return this.apiClient.postParamsPayload(

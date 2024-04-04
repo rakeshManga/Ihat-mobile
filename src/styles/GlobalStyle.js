@@ -32,12 +32,12 @@ export default StyleSheet.create({
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 5,
         },
         shadowOpacity: 0.25,
         shadowRadius: 1.84,
 
-        elevation: 5,
+        elevation: 20,
     },
 
     bottomTabText: {
@@ -51,7 +51,7 @@ export default StyleSheet.create({
         alignSelf:'center',
         zIndex: 100,
         borderRadius: 6,
-        borderColor: Constants.THEME_COLOR,
+        borderColor: Constants.AXA_THEME_COLOR,//Constants.THEME_COLOR,
         borderWidth: 1
     },
 
@@ -93,3 +93,68 @@ export default StyleSheet.create({
         fontFamily: Constants.FONT_REGULAR,
       },
 })
+
+
+/* fonts */
+export const FontFamily = {
+    kadwaRegular: "Kadwa_regular",
+    kadwaBold: "Kadwa_bold",
+    avenirLTStdRegular: "AvenirLTStd_regular",
+    robotoRegular: "Roboto_regular",
+    robotoMedium: "Roboto_medium",
+    robotoBold: "Roboto_bold",
+    robotoSemibold: "Roboto_semibold",
+    poppinsRegular: "Poppins_regular",
+    sourceSansProSemibold: "SourceSansPro_semibold",
+  };
+  /* font sizes */
+  export const FontSize = {
+    size_xs: 12,
+    size_base: 16,
+    size_base1: 19,
+    size_base2: 18,
+    size_mini: 15,
+    size_sm: 14,
+    size_smi: 13,
+    size_mini_3: 14,
+    size_sm_3: 13,
+    size_6xl: 25,
+    size_xl: 20,
+    size_xxl: 24,
+    size_11xl: 30,
+  };
+  /* Colors */
+  export const Color = {
+    white: "#fff",
+    black: "#000",
+    gray_100: "#fefefe",
+    gray_200: "#818181",
+    gray_300: "#777",
+    gray_400: "#202020",
+    gray_500: "#0b0b0b",
+    gray_600: "rgba(255, 255, 255, 0)",
+    dimgray_100: "#6b6b6b",
+    dimgray_200: "#575757",
+    darkslategray_100: "#363636",
+    honeydew_100: "#e9f9e5",
+    honeydew_200: "#cef3db",
+    aliceblue_100: "#e6ebf5",
+    aliceblue_200: "#daedf3",
+    mediumseagreen_100: "#34af5f",
+    mediumseagreen_200: "#34af5e",
+    forestgreen: "#1b9e49",
+    darkgray_100: "#a5a5a5",
+    darkgray_200: "#969696",
+    darkolivegreen: "#20562b",
+  };
+  /* border radiuses */
+  export const Border = {
+    br_3xs: 10,
+    br_8xs: 5,
+    br_10xs: 3,
+    br_5xs: 8,
+    br_xl: 20,
+    br_9xs_1: 3,
+    br_mini_7: 15,
+  };
+  

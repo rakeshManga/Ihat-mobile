@@ -2,12 +2,12 @@ import NetInfo from '@react-native-community/netinfo';
 import {Linking, Platform, Share} from 'react-native';
 import Config from 'react-native-config';
 import api from '../api';
-import {
-  PayUBiz,
-  PayuEvent,
-  PAYU_PAYMENT_FAILED,
-  PAYU_PAYMENT_SUCCESS,
-} from '../payUBizNativeBridge/PayUModule';
+// import {
+//   PayUBiz,
+//   PayuEvent,
+//   PAYU_PAYMENT_FAILED,
+//   PAYU_PAYMENT_SUCCESS,
+// } from '../payUBizNativeBridge/PayUModule';
 import { PAYMENT_TYPE } from '../styles/Const';
 import {AppOkAlert} from './AlertHelper';
 import { isWalletUsagesChargesDefined } from './AsyncStorageHelper';

@@ -1,5 +1,5 @@
 import AsyncStorage  from '@react-native-community/async-storage'
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 import Config from 'react-native-config';
 import { ORG_NAME } from '../styles/Const';
 import { AppOkAlert } from './AlertHelper';
