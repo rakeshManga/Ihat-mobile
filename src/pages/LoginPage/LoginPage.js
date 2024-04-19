@@ -9,7 +9,6 @@ const LoginPage = () => {
   const [captchaRes, setCaptchaRes] = useState([]);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [captchaImg, setCaptchaImg] = useState();
   useEffect(()=>{
     getCaptcha();
 },[]);
@@ -25,15 +24,14 @@ const getCaptcha = async () => {
 }
 const ReloadCaptcha = async () => {
   setLoading(true);
-  setCaptchaImg('');
+  setCaptchaRes('');
   let payload={
     userId: 0,
     platform: 2
   }
   const res = await api.user.reloadCaptcha(payload);
-  setCaptchaImg(res.data.captchaImg)
+  setCaptchaRes(res.data.captchaImg)
   setLoading(false);
-  console.log("captcha>>>>>>>>",captchaImg);
 }
   return (
     <View>
@@ -43,8 +41,6 @@ const ReloadCaptcha = async () => {
     setUsername={setUsername}
     password={password}
     setPassword={setPassword}
-    // captchaImg={captchaImg}
-    // setCaptchaImg={setCaptchaImg}
     ReloadCaptcha={ReloadCaptcha}
     />
     </View>

@@ -13,10 +13,11 @@ export default class UserAPI extends Base {
   apkVersion(data) {
     return this.apiClient.get(`ihat-surveillance/apk-verison/v1/getbyid`,data);
   }
+  // https://surveillance-qa.dhanushinfotech.com/api/users/v1/authenticate
   signIn(intl, params, data) {
     return this.apiClient.postParamsPayload(
       intl,
-      "sahiya-login/login/signin",
+      "api/users/v1/authenticate",
       params,
       data
     );

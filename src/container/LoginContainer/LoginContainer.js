@@ -13,7 +13,8 @@ import {
     BackHandler,
     Alert,
     ImageBackground,
-    ScrollView
+    ScrollView,
+    SafeAreaView
 } from 'react-native';
 import { Common } from '../../assets/images';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -61,9 +62,10 @@ const LoginContainer = (props) => {
     };
 
     return (
-        <TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-            <ImageBackground source={Common.LOGIN_IMAGE} style={styles.container}>
-                <ScrollView style={styles.mainContainer}>
+        <SafeAreaView style={{}}>
+        <ScrollView >
+            <ImageBackground resizeMode={"stretch"} source={Common.LOGIN_IMAGE} style={styles.container}>
+                <View style={styles.mainContainer}>
 
                     <View style={styles.inputContainer}>
                         <TextInput
@@ -103,12 +105,12 @@ const LoginContainer = (props) => {
                             />
                         </View>
                         <TouchableOpacity onPress={() => { ReloadCaptcha() }}>
-                            <Ionicons name='reload' size={25} color="#000" />
+                            <Ionicons name='reload' size={20} color="#000" />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.inputContainer}>
                         <TextInput
-                            placeholder="Captcha"
+                            placeholder="Enter Captcha"
                             keyboardType="default"
                             style={styles.captchaStyle}
                             value={captchaImg}
@@ -130,14 +132,14 @@ const LoginContainer = (props) => {
                             justifyContent: "center",
                             flexDirection: "row",
                             alignSelf: "center",
-                            marginTop: 30
                         }}>
                             <Text style={styles.svText}>Click here for Register </Text>
                         </View>
                     </TouchableOpacity>
-                </ScrollView>
+                </View>
             </ImageBackground>
-        </TouchableWithoutFeedback>
+        </ScrollView>
+        </SafeAreaView>
     );
 }
 export default LoginContainer;
@@ -145,11 +147,12 @@ export default LoginContainer;
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        height: "100%"
+        // height: "60%"
+        flex:1
     },
     headerContainer: {
         width: "100%",
-        height: 60,
+        height: 55,
         marginTop: StatusBar.currentHeight,
         justifyContent: "space-between",
         flexDirection: "row",
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 100
     },
     headeringStyle: {
-        fontWeight: "bold",
+        // fontWeight: "bold",
         marginLeft: 10,
         fontSize: 20,
         color: "#000"
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         width: "100%",
         height: "75%",
-        marginTop: "125%"
+        marginTop: "113%"
         // backgroundColor: "white", 
         // borderTopLeftRadius: 50,
         // borderTopRightRadius: 50,
@@ -196,7 +199,8 @@ const styles = StyleSheet.create({
         height: 40,
         paddingLeft: 10,
         borderWidth: 1,
-        borderColor: "block"
+        borderColor: "block",
+        borderRadius:5
     },
     svpassword: {
         width: "80%",
@@ -206,26 +210,25 @@ const styles = StyleSheet.create({
         alignItems: "center",
 
     },
-    svText: {
-        color: "rgb(0, 153, 255)"
-    },
+    
     button: {
-        width: "80%",
+        width: "70%",
         height: 38,
-        backgroundColor: "rgb(0, 153, 255)",
+        backgroundColor: "#4F85D7",
         alignSelf: "center",
-        // borderRadius: 10,
+        borderRadius: 5,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 5
     },
     inputContainer1: {
-        width: "75%",
-        height: 30,
-        alignContent: "center",
+        width: "78%",
+        height: 35,
+        // alignContent: "center",
         borderWidth: 1, 
         alignItems: "center",
-        justifyContent: "center"
+        // justifyContent: "center",
+        borderRadius:5,
+        borderColor:"#4F85D7"
     },
     captchaStyle: {
         width: "100%",
@@ -233,7 +236,8 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         // borderWidth: 1,
         borderBottomWidth: 1,
-        borderColor: "block"
+        borderColor: "block",
+        marginTop:5
     }
 });
 
